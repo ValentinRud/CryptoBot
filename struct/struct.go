@@ -59,3 +59,8 @@ type User struct {
 	Age       int    `json:"age"`
 	Status    string `json:"status"`
 }
+
+type SendUser struct {
+	Id       int    `json:"id"`
+	LastName string `json:"lastName"`
+}

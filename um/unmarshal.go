@@ -48,3 +48,31 @@ func InsertDb() {
 	defer result.Close()
 
 }
+
+func SelectDb() {
+	db, err := sql.Open("postgres", config.ConnStr)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer db.Close()
+
+	rows, err := db.Query("SELECT id, last_name FROM test ORDER BY id ASC")
+	if err != nil {
+		panic(err)
+	}
+	sendUsers := []structApi.SendUser{}
+
+	for rows.Next() {
+		p := structApi.SendUser{}
+		err := rows.Scan(&p.Id, &p.LastName)
+		if err != nil {
+			fmt.Println(err)
+			continue
+		}
+		sendUsers = append(sendUsers, p)
+	}
+
+	for _, p := range sendUsers {
+		fmt.Println(p.Id, p.LastName)
+	}
+}
