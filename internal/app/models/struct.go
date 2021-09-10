@@ -1,4 +1,4 @@
-package structApi
+package models
 
 import "time"
 

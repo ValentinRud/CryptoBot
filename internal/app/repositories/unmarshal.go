@@ -2,6 +2,7 @@ package um
 
 import (
 	"Project/config"
+	"Project/internal/app/models"
 	structApi "Project/struct"
 	"database/sql"
 	"encoding/json"
@@ -12,10 +13,30 @@ import (
 	_ "github.com/lib/pq"
 )
 
-var ag structApi.User
+// 1
+// Сделать структуру репозитория с двумя методами
+// Create (insert) func .. Create(..) error
+// List (select списка) func ... List(..)
+// Открыть соединение с базой один раз
+// Пробросить сущность базы аргументом в конструкторе репозитория
+
+// 2
+// Получить json в сообщение из телеграма и сохранить его в базу
+
+// 3
+// Если ты получишь команду /getUser, то нужно вывести пользователя из базы
+// Пример сообщения, которое ты должен получить на команду /getUser:
+/*
+Идентификатор: 10
+Имя: Имя
+Фамилия: Фамилия
+Возраст: 18
+Статус: студент
+*/
+
+var ag models.User
 
 func Js() {
-
 	file, err := os.Open("data1.json")
 	if err != nil {
 		fmt.Println(err)
@@ -31,7 +52,6 @@ func Js() {
 	}
 
 	fmt.Println(ag)
-
 }
 
 func InsertDb() {

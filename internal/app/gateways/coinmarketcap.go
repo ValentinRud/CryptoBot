@@ -1,4 +1,4 @@
-package api
+package gateways
 
 import (
 	"Project/config"
@@ -10,7 +10,14 @@ import (
 	"os"
 )
 
-func ApiInfo() {
+type CoinMarketCapGateway struct {
+}
+
+func NewCoinMarketCapGateway() *CoinMarketCapGateway {
+	return &CoinMarketCapGateway{}
+}
+
+func (s *CoinMarketCapGateway) GetBalance() (interface{}, error) {
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", config.ServerUrl, nil)
 	if err != nil {
@@ -24,7 +31,7 @@ func ApiInfo() {
 	q.Add("convert", "USD")
 
 	req.Header.Set("Accepts", "application/json")
-	req.Header.Add("X-CMC_PRO_API_KEY", config.ApiToken)
+	req.Header.Add("X-CMC_PRO_API_KEY", config.PgvTestBotToken)
 	req.URL.RawQuery = q.Encode()
 
 	resp, err := client.Do(req)
@@ -34,6 +41,13 @@ func ApiInfo() {
 	}
 
 	fmt.Println(resp.Status)
-	respBody, _ := ioutil.ReadAll(resp.Body)
+
+	respBody, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
 	fmt.Println(string(respBody))
+
+	return string(respBody), nil
 }
