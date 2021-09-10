@@ -7,7 +7,7 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
-func Tbot() {
+func Telebot() {
 	bot, err := tgbotapi.NewBotAPI(config.TeleToken)
 	if err != nil {
 		log.Panic(err)
