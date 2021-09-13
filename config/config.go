@@ -6,5 +6,5 @@ var (
 	ServerUrl       = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest"
 	ApiToken        = "2d07963e-a5be-490e-b824-f2a81c5b6e6c"
 	ConnStr         = "user=postgres password=Qweasdzxc1 dbname=users sslmode=disable"
-	GitToken        = "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"
+	GitToken        = "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"
 )
